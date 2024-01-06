@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <h2>Gestion Des Formations</h2>
+  <div class="row">
+    <div class="d-flex flex align-items-center">
+      <input
+        class="form-control col-6 m-2 w-25"
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="filterTraning()"
+        placeholder="Recherche"
+      />
+      <div>
+        <button class="btn btn-success" (click)="openCreateModal()">
+          Ajouter Formation
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered w-100">
+    <thead>
+      <tr class="text-center">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Employer</th>
+        <th>Compétance</th>
+        <th>Date Création</th>
+        <th>Date d'optention</th>
+        <th>Résultat Dérniere Evaluation</th>
+        <th>Actions</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let formation of filteredFormations">
+        <td>{{ formation.TraningId }}</td>
+        <td>{{ formation.name }}</td>
+        <td>{{ formation.skill.employee ?? "--" }}</td>
+        <td>{{ formation.skill.skillName ?? "--" }}</td>
+        <td>{{ formation.createdAt ?? "--" }}</td>
+        <td>{{ formation.passedAt ?? "--" }}</td>
+        <td>{{ formation.skill.lastEvaluation ?? "-" }}</td>
+        <td>
+          <ng-container class="m-2">
+            <!-- Update Button -->
+            <button
+              (click)="openUpdateModal(formation)"
+              class="btn mx-2 btn-primary"
+            >
+              <i class="fas fa-edit"></i> Modifier
+            </button>
+
+            <!-- Delete Button -->
+            <button
+              (click)="deleteEmployee(formation.TraningId)"
+              class="btn mx-2 btn-danger"
+            >
+              <i class="fas fa-trash"></i> Supprimer
+            </button>
+
+            <!-- Add more columns as needed -->
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

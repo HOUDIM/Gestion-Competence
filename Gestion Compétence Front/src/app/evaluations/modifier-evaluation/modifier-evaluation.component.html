@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title">Modifier Evaluation</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- Form to update employee data -->
+  <form [formGroup]="form" (ngSubmit)="updateEvaluation()">
+    <!-- Add form fields for updating employee data (e.g., name, email, phone) -->
+    <div class="form-group mb-4 m-2">
+      <label for="name">Evaluation</label>
+      <select
+        [class.is-invalid]="rating.invalid && rating.touched"
+        formControlName="rating"
+        aria-label="Evaluation Souhaité"
+        cSelect
+        aria-placeholder="Choisir L'evaluation Adéquate Pour Cette Compétance"
+      >
+        <option [selected]="true">
+          Choisir La Note Adéquate Pour Cet Compétance
+        </option>
+        <option value="PASSER">Passé</option>
+        <option value="REFUSER">Réfusé</option>
+      </select>
+    </div>
+    <!-- Add more form fields as needed -->
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </form>
+</div>

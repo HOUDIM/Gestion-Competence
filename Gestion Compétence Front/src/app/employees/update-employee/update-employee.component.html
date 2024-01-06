@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h4 class="modal-title">Modifier Employé</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- Form to update employee data -->
+  <form (ngSubmit)="updateEmployee()">
+    <!-- Add form fields for updating employee data (e.g., name, email, phone) -->
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="employee.name"
+        name="name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        [(ngModel)]="employee.email"
+        name="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="phone">Téléphone</label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        [(ngModel)]="employee.phone"
+        name="phone"
+      />
+    </div>
+    <!-- Add more form fields as needed -->
+    <button type="submit" class="btn btn-primary">Modifier</button>
+  </form>
+</div>

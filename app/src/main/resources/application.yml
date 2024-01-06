@@ -1,0 +1,54 @@
+# Spring Boot application properties
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: evaluation app  # Set your application name
+  datasource:
+    url: jdbc:postgresql://localhost:54320/pfedatabase?createDatabaseIfNotExist=true # Use the container name "postgres" as the hostname
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format-sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    default: dev
+
+# Server configuration (if needed)
+server:
+  port: 8080  # Set the port your application will run on
+
+# Logging configuration (adjust log levels as needed)
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    your.package: DEBUG  # Adjust package name and log level as needed
+
+# Security configuration (if needed)
+# spring:
+#   security:
+#     user:
+#       name: your_username
+#       password: your_password
+
+# Application-specific properties (custom configurations)
+#custom:
+#  property:
+#    key: value  # Define your custom properties as needed
+jwt:
+  token:
+    validity: 18000
+    prefix: Bearer
+  signing:
+    key: signingkey
+  authorities:
+    key: roles
+  header:
+    string: Authorization

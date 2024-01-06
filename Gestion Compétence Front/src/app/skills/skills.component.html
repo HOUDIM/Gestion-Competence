@@ -1,0 +1,103 @@
+<div class="container mt-4">
+  <h2>Gestion des compétences</h2>
+  <input
+    class="form-control col-6 m-2 w-25"
+    type="text"
+    [(ngModel)]="searchTerm"
+    (input)="filterEmployees()"
+    placeholder="Recherche"
+  />
+
+  <table class="table table-bordered w-100">
+    <thead>
+      <tr class="text-center">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+
+        <th>Actions</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let employee of filteredEmployees">
+        <tr class="text-center">
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.phone }}</td>
+          <td>{{ employee.role }}</td>
+          <td>
+            <ng-container class="m-2">
+              <!-- Toggle Button -->
+              <button
+                (click)="toggleRow(employee.id)"
+                class="btn mx-2 btn-primary"
+              >
+                {{ expandedEmployeeId === employee.id ? "Retour" : "Afficher" }}
+              </button>
+              <button
+                (click)="openAddSkill(employee.id)"
+                class="btn mx-2 btn-success"
+              >
+                Ajouter Compétance
+              </button>
+              <!-- Add more columns as needed -->
+            </ng-container>
+          </td>
+        </tr>
+        <!-- Conditionally render the details row -->
+        <tr *ngIf="expandedEmployeeId === employee.id">
+          <td colspan="7">
+            <!-- Nested table for employee details -->
+            <table class="table table-bordered">
+              <thead>
+                <tr class="text-center">
+                  <th>ID</th>
+                  <th>Nom De Compétance</th>
+                  <th>Date De Création</th>
+                  <th>Date De Modification</th>
+                  <th>Dérniere Evaluation</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" *ngFor="let skill of employee.skills">
+                  <td>{{ skill.skillId }}</td>
+                  <td>{{ skill.skillName }}</td>
+                  <td>{{ skill.createdAt }}</td>
+                  <td>{{ skill.updatedAt ?? "--" }}</td>
+                  <td>{{ skill.lastEvaluation ?? "--" }}</td>
+
+                  <td>
+                    <ng-container class="m-2">
+                      <!-- Update Button -->
+                      <button
+                        (click)="openUpdateModal(skill)"
+                        class="btn mx-2 btn-primary"
+                      >
+                        <i class="fas fa-edit"></i> Modifier
+                      </button>
+
+                      <!-- Delete Button -->
+                      <button
+                        (click)="deleteSkill(skill.skillId)"
+                        class="btn mx-2 btn-danger"
+                      >
+                        <i class="fas fa-trash"></i> Supprimer
+                      </button>
+
+                      <!-- Add more columns as needed -->
+                    </ng-container>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

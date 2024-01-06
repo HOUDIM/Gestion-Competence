@@ -1,0 +1,105 @@
+<div class="container mt-4">
+  <h2>Gestion Des Evaluations</h2>
+  <input
+    class="form-control col-6 m-2 w-25"
+    type="text"
+    [(ngModel)]="searchTerm"
+    (input)="filterEmployees()"
+    placeholder="Recherche"
+  />
+
+  <table class="table table-bordered w-100">
+    <thead>
+      <tr class="text-center">
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Dérniere Evaluation</th>
+        <th>Employeé</th>
+        <th>Date De Création</th>
+        <th>Date De Modification</th>
+        <th>Actions</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let skill of filteredSkills">
+        <tr class="text-center">
+          <td>{{ skill.skillId }}</td>
+          <td>{{ skill.skillName }}</td>
+          <td>{{ skill.lastEvaluation ?? "--" }}</td>
+          <td>{{ skill.employee.name ?? "--" }}</td>
+          <td>{{ skill.createdAt }}</td>
+          <td>{{ skill.updatedAt ?? "--" }}</td>
+          <td>
+            <ng-container class="m-2">
+              <!-- Toggle Button -->
+              <button
+                (click)="toggleRow(skill.skillId)"
+                class="btn mx-2 btn-primary"
+              >
+                {{ expandedSkillId === skill.skillId ? "Retour" : "Afficher" }}
+              </button>
+              <button
+                (click)="openAddSkill(skill.skillId)"
+                class="btn mx-2 btn-success"
+              >
+                Ajouter
+              </button>
+              <!-- Add more columns as needed -->
+            </ng-container>
+          </td>
+        </tr>
+        <!-- Conditionally render the details row -->
+        <tr *ngIf="expandedSkillId === skill.skillId">
+          <td colspan="7">
+            <!-- Nested table for employee details -->
+            <table class="table table-bordered">
+              <thead>
+                <tr class="text-center">
+                  <th>ID</th>
+                  <th>Rating</th>
+                  <th>Date De Création</th>
+                  <th>Date De Modification</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="text-center"
+                  *ngFor="let evaluation of skill.evaluations"
+                >
+                  <td>{{ evaluation.id }}</td>
+                  <td>{{ evaluation.rating }}</td>
+                  <td>{{ evaluation.createdAt }}</td>
+                  <td>{{ evaluation.updatedAt ?? "--" }}</td>
+
+                  <td>
+                    <ng-container class="m-2">
+                      <!-- Update Button -->
+                      <button
+                        (click)="openUpdateEvaluation(evaluation)"
+                        class="btn mx-2 btn-primary"
+                      >
+                        <i class="fas fa-edit"></i> Modifier
+                      </button>
+
+                      <!-- Delete Button -->
+                      <button
+                        (click)="deleteEvaluation(evaluation.id)"
+                        class="btn mx-2 btn-danger"
+                      >
+                        <i class="fas fa-trash"></i> Supprimer
+                      </button>
+
+                      <!-- Add more columns as needed -->
+                    </ng-container>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

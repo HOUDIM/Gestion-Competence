@@ -1,0 +1,118 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <div *ngIf="success" class="container">
+              <div class="paragraph">
+                Votre demande d'enregistrement a été enregistré avec succès.
+                Veuillez attendre que l'administrateur accepte votre demande.
+              </div>
+              <br />
+              <button
+                class="d-flex align-items-center justify-content-center m-auto"
+                (click)="goBack()"
+                cButton
+                color="info"
+              >
+                Retourner
+              </button>
+            </div>
+            <form [formGroup]="form" *ngIf="success === false" cForm>
+              <h1>S'inscrire</h1>
+              <p class="text-medium-emphasis">Créer Votre Compte </p>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input
+                  [class.is-invalid]="name.invalid && name.touched"
+                  formControlName="name"
+                  autoComplete="name"
+                  cFormControl
+                  placeholder="Nom"
+                />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input
+                  [class.is-invalid]="name.invalid && name.touched"
+                  formControlName="username"
+                  autoComplete="name"
+                  cFormControl
+                  placeholder="Pseudo"
+                />
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input
+                  [class.is-invalid]="phone.invalid && phone.touched"
+                  formControlName="phone"
+                  autoComplete="new-password"
+                  cFormControl
+                  placeholder="Numéro Du Télephone"
+                  type="tel"
+                />
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <select
+                  [class.is-invalid]="role.invalid && role.touched"
+                  formControlName="role"
+                  aria-label="Role Souhaité"
+                  cSelect
+                  aria-placeholder="Choisir Votre Role Souhaité"
+                >
+                  <option [selected]="true">Choisir Votre Rôle Souhaité</option>
+                  <option value="ROLE_RH">RH</option>
+                  <option value="ROLE_EMPLOYER">EMPLOYE</option>
+                </select>
+              </c-input-group>
+
+              <c-input-group class="mb-3">
+                <span cInputGroupText>@</span>
+                <input
+                  [class.is-invalid]="email.invalid && email.touched"
+                  formControlName="email"
+                  autoComplete="email"
+                  cFormControl
+                  placeholder="Adresse E-mail"
+                />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input
+                  [class.is-invalid]="password.invalid && password.touched"
+                  formControlName="password"
+                  autoComplete="new-password"
+                  cFormControl
+                  placeholder="Mot De Passe"
+                  type="password"
+                />
+              </c-input-group>
+              <div class="d-grid">
+                <button (click)="register()" cButton color="success">
+                  S'inscrire
+                </button>
+              </div>
+              <div class="d-grid mt-2">
+                <button (click)="goBack()" cButton color="primary">
+                  Se Connecter
+                </button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

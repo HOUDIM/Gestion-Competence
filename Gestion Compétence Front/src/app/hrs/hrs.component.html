@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <h2>Gestion Des Resources Humaines</h2>
+  <input
+    class="form-control col-6 m-2 w-25"
+    type="text"
+    [(ngModel)]="searchTerm"
+    (input)="filterEmployees()"
+    placeholder="Recherche"
+  />
+
+  <table class="table table-bordered w-100">
+    <thead>
+      <tr class="text-center">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Actions</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let employee of filteredHrs">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.phone }}</td>
+        <td>{{ employee.role }}</td>
+        <td>
+          <ng-container class="m-2">
+            <!-- Update Button -->
+            <button
+              (click)="openUpdateModal(employee)"
+              class="btn mx-2 btn-primary"
+            >
+              <i class="fas fa-edit"></i> Modifier
+            </button>
+
+            <!-- Delete Button -->
+            <button
+              (click)="deleteHr(employee.username)"
+              class="btn mx-2 btn-danger"
+            >
+              <i class="fas fa-trash"></i> Supprimer
+            </button>
+            <button
+              (click)="toggleBlockHr(employee.username)"
+              class="btn mx-2 btn-warning"
+            >
+              {{ employee.isApproved ? "Blocker" : "Déblocker" }}
+            </button>
+            <!-- Add more columns as needed -->
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
